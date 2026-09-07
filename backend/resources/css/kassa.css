@@ -1,0 +1,58 @@
+body {
+    margin: 8px;
+}
+
+.kassa-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 82px;
+    border-bottom: 3px solid rgb(0, 102, 255);
+}
+
+.kassa-header__logo {
+    display: block;
+    height: 80px;
+}
+
+.kassa-header__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 82px;
+}
+
+.kassa-login {
+    width: 250px;
+    margin: 100px auto 0;
+    padding: 30px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.kassa-login input {
+    width: 100%;
+    margin: 2px;
+}
+
+.kassa-login input[type="submit"] {
+    width: 60%;
+}
+
+.error-message {
+    padding: 10px;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

@@ -17,3 +17,6 @@ Route::view('/contact', 'pages.contact')
 Route::view('/aanbiedingen', 'pages.offers')
     ->name('offers');
 
+Route::view('/kassa', 'pages.kassa.login')
+    ->name('kassa.login');
+
