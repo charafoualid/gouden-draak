@@ -6,7 +6,10 @@
 
     <title>@yield('title', 'GoodPay Kassa')</title>
 
-    @vite('resources/css/kassa.css')
+    @vite([
+        'resources/css/kassa.css',
+        'resources/js/app.js',
+    ])
 </head>
 <body>
     <header class="kassa-header">
