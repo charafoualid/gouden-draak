@@ -16,9 +16,32 @@ body {
 
 .kassa-header__navigation {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 82px;
+}
+
+.kassa-menu-button {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 180px;
+    margin: 5px;
+    padding: 5px 0;
+    border: 1px solid rgb(0, 102, 255);
+    border-radius: 10px;
+    background-color: rgb(222, 235, 247);
+    color: rgb(0, 102, 255);
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.kassa-logout-form {
+    margin-left: 50px;
 }
 
 .kassa-login {
@@ -55,4 +78,120 @@ body {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+.kassa-menu-page {
+    padding: 30px;
+}
+
+.kassa-menu-page__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Kassascherm */
+
+.cash-desk {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    width: 100%;
+    height: 600px;
+    margin-top: 20px;
+}
+
+.cash-desk__left,
+.cash-desk__right {
+    height: 600px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cash-desk__left {
+    border-right: 2px solid rgb(0, 102, 255);
+}
+
+.cash-desk__menu,
+.cash-desk__order {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: scroll;
+    border: 1px solid rgb(0, 102, 255);
+    border-radius: 5px 0 0 5px;
+}
+
+.cash-desk__order-container {
+    height: 100%;
+}
+
+.cash-desk__order {
+    height: 85%;
+}
+
+.cash-desk__total {
+    box-sizing: border-box;
+    width: 100%;
+    height: 15%;
+    padding: 10px;
+    border: 1px solid rgb(0, 102, 255);
+    border-radius: 5px;
+}
+
+.cash-desk__heading {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cash-desk__heading:first-child,
+.cash-desk__order-heading {
+    margin-top: 0;
+}
+
+.cash-desk__menu-table,
+.cash-desk__order-table,
+.cash-desk__total-table {
+    width: 100%;
+}
+
+.cash-desk__menu-table td:nth-child(1),
+.cash-desk__order-table td:nth-child(1),
+.cash-desk__total-table td:nth-child(1) {
+    width: 10%;
+    vertical-align: top;
+}
+
+.cash-desk__menu-table td:nth-child(2) {
+    width: 70%;
+}
+
+.cash-desk__menu-table td:nth-child(3),
+.cash-desk__order-table td:nth-child(3) {
+    width: 10%;
+    min-width: 70px;
+}
+
+.cash-desk__order-table td:nth-child(2) {
+    width: 65%;
+}
+
+.cash-desk__total-table {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.cash-desk__total-table td:nth-child(2) {
+    width: 50%;
+}
+
+.cash-desk__total-table td:nth-child(3) {
+    width: 15%;
+}
+
+.cash-desk__actions button {
+    display: block;
+    margin: 2px 0;
 }

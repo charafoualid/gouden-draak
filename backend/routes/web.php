@@ -2,15 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kassa\LoginController;
+use App\Http\Controllers\Kassa\KassaController;
 
 Route::view('/', 'pages.home')
     ->name('home');
 
-Route::view('/menukaart', 'pages.menukaart')
-    ->name('menukaart');
+Route::view('/kassa/gerechten', 'pages.kassa.gerechten')
+    ->middleware('auth')
+    ->name('kassa.gerechten');
 
 Route::view('/nieuws', 'pages.news')
     ->name('nieuws');
+
+Route::view('/menukaart', 'pages.menukaart')
+    ->name('menukaart');
 
 Route::view('/contact', 'pages.contact')
     ->name('contact');
@@ -22,8 +27,12 @@ Route::view('/kassa', 'pages.kassa.login')
     ->name('kassa.login');
 
 Route::post('/kassa/login', [LoginController::class, 'login'])
-    ->name('kassa.login');
+    ->name('kassa.login.submit');
 
-Route::view('/kassa/dashboard', 'pages.kassa.dashboard')
+Route::post('/kassa/logout', [LoginController::class, 'logout'])
+    ->middleware('auth')
+    ->name('kassa.logout');
+
+Route::get('/kassa/dashboard', [KassaController::class, 'index'])
     ->middleware('auth')
     ->name('kassa.dashboard');

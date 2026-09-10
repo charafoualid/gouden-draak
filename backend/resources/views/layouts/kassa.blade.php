@@ -16,8 +16,38 @@
             alt="GoodPay-logo"
         >
 
-        <nav class="kassa-header__navigation">
-            @yield('navigation')
+        <nav class="kassa-header__navigation" aria-label="Kassanavigatie">
+            @auth
+                <a
+                    class="kassa-menu-button"
+                    href="{{ route('kassa.dashboard') }}"
+                >
+                    Kassa
+                </a>
+
+                <a
+                    class="kassa-menu-button"
+                    href="{{ route('kassa.gerechten') }}"
+                >
+                    Gerechten
+                </a>
+
+                <button class="kassa-menu-button" type="button">
+                    Verkoop Overzicht
+                </button>
+
+                <form
+                    class="kassa-logout-form"
+                    action="{{ route('kassa.logout') }}"
+                    method="POST"
+                >
+                    @csrf
+
+                    <button class="kassa-menu-button" type="submit">
+                        Log Uit
+                    </button>
+                </form>
+            @endauth
         </nav>
     </header>
 

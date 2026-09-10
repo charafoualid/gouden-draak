@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="kassa-login">
-        <form action="{{ url('/kassa/login') }}" method="POST">
+        <form action="{{ route('kassa.login.submit') }}" method="POST">
             @csrf
 
             <label class="visually-hidden" for="employeeNr">

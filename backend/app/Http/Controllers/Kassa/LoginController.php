@@ -40,4 +40,14 @@ class LoginController extends Controller
 
         return redirect()->intended('/kassa/dashboard');
     }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('kassa.login');
+    }
 }
