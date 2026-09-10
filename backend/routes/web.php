@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Kassa\LoginController;
 
 Route::view('/', 'pages.home')
     ->name('home');
@@ -20,3 +21,9 @@ Route::view('/aanbiedingen', 'pages.offers')
 Route::view('/kassa', 'pages.kassa.login')
     ->name('kassa.login');
 
+Route::post('/kassa/login', [LoginController::class, 'login'])
+    ->name('kassa.login');
+
+Route::view('/kassa/dashboard', 'pages.kassa.dashboard')
+    ->middleware('auth')
+    ->name('kassa.dashboard');
