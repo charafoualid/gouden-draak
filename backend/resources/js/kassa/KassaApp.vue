@@ -128,6 +128,38 @@ const gefilterdeGerechten = computed(() => {
     )
 })
 
+const hulpBezig = ref(false)
+
+async function vraagHulp() {
+    hulpBezig.value = true
+
+    try {
+        const response = await fetch('/bestellen/hulp', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'X-CSRF-TOKEN': document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute('content'),
+            },
+        })
+
+        const resultaat = await response.json()
+
+        if (!response.ok) {
+            throw new Error(
+                resultaat.message ?? 'Hulp vragen is mislukt.'
+            )
+        }
+
+        alert(resultaat.message)
+    } catch (fout) {
+        alert(fout.message)
+    } finally {
+        hulpBezig.value = false
+    }
+}
+
 </script>
 
 <template>
@@ -267,6 +299,15 @@ const gefilterdeGerechten = computed(() => {
                         </tbody>
                     </table>
                 </div>
+                <button
+                    v-if="modus === 'tablet'"
+                    class="cash-desk__help-button"
+                    type="button"
+                    :disabled="hulpBezig"
+                    @click="vraagHulp"
+                >
+                    {{ hulpBezig ? 'Bezig...' : 'Ik heb hulp nodig' }}
+                </button>
             </div>
         </div>
     </section>

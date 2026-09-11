@@ -10,6 +10,7 @@ use App\Models\Bestelling;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use App\Models\Hulpvraag;
 
 class BestellingController extends Controller
 {
@@ -137,5 +138,32 @@ class BestellingController extends Controller
             'ronde' => $rondes + 1,
             'resterende_rondes' => 4 - $rondes,
         ], 201);
+    }
+
+    public function vraagHulp(Request $request): JsonResponse
+    {
+        $tafelnummer = $request->session()->get('tablet.tafelnummer');
+
+        if (!$tafelnummer) {
+            return response()->json([
+                'message' => 'Kies eerst een tafelnummer.',
+            ], 422);
+        }
+
+        $hulpvraag = Hulpvraag::firstOrCreate(
+            [
+                'tafelnummer' => $tafelnummer,
+                'afgehandeld' => false,
+            ],
+            [
+                'aangemaakt_op' => now(),
+            ]
+        );
+
+        return response()->json([
+            'message' => $hulpvraag->wasRecentlyCreated
+                ? 'Een medewerker komt zo naar uw tafel.'
+                : 'Uw hulpvraag staat al open.',
+        ]);
     }
 }

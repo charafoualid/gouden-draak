@@ -9,6 +9,8 @@ use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Hulpvraag;
+use Illuminate\Http\RedirectResponse;
 
 class KassaController extends Controller
 {
@@ -121,6 +123,30 @@ class KassaController extends Controller
                 'exclusief_btw' => $omzetExclusiefBtw,
             ],
         ]);
+    }
+
+    public function hulpvragen(): View
+    {
+        $hulpvragen = Hulpvraag::query()
+            ->where('afgehandeld', false)
+            ->orderBy('aangemaakt_op')
+            ->get();
+
+        return view('pages.kassa.hulpvragen', [
+            'hulpvragen' => $hulpvragen,
+        ]);
+    }
+
+    public function handelHulpvraagAf(
+        Hulpvraag $hulpvraag
+    ): RedirectResponse {
+        $hulpvraag->update([
+            'afgehandeld' => true,
+        ]);
+
+        return redirect()
+            ->route('kassa.hulpvragen')
+            ->with('success', 'Hulpvraag is afgemeld.');
     }
 
 }

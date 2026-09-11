@@ -73,3 +73,22 @@ Route::post(
     '/bestellen/plaatsen',
     [BestellingController::class, 'plaatsBestelling']
 )->name('bestellen.plaatsen');
+
+Route::post(
+    '/bestellen/hulp',
+    [BestellingController::class, 'vraagHulp']
+)->name('bestellen.hulp');
+
+Route::get(
+    '/kassa/hulpvragen',
+    [KassaController::class, 'hulpvragen']
+)
+    ->middleware('auth')
+    ->name('kassa.hulpvragen');
+
+Route::patch(
+    '/kassa/hulpvragen/{hulpvraag}/afmelden',
+    [KassaController::class, 'handelHulpvraagAf']
+)
+    ->middleware('auth')
+    ->name('kassa.hulpvragen.afmelden');

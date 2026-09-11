@@ -40,6 +40,13 @@
                     Verkoop Overzicht
                 </a>
 
+                <a
+                    class="kassa-menu-button"
+                    href="{{ route('kassa.hulpvragen') }}"
+                >
+                    Hulpvragen
+                </a>
+
                 <form
                     class="kassa-logout-form"
                     action="{{ route('kassa.logout') }}"
