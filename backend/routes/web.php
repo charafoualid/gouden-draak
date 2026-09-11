@@ -36,3 +36,7 @@ Route::post('/kassa/logout', [LoginController::class, 'logout'])
 Route::get('/kassa/dashboard', [KassaController::class, 'index'])
     ->middleware('auth')
     ->name('kassa.dashboard');
+
+Route::post('/kassa/afrekenen', [KassaController::class, 'afrekenen'])
+    ->middleware('auth')
+    ->name('kassa.afrekenen');

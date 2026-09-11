@@ -42,6 +42,42 @@ function formatPrice(price) {
 function verwijderBestelling() {
     bestelling.value = []
 }
+
+async function afrekenen() {
+    if (bestelling.value.length === 0) {
+        return
+    }
+
+    try {
+        const response = await fetch('/kassa/afrekenen', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute('content'),
+            },
+            body: JSON.stringify({
+                gerechten: bestelling.value.map(gerecht => ({
+                    id: gerecht.id,
+                    aantal: gerecht.aantal,
+                })),
+            }),
+        })
+
+        const resultaat = await response.json()
+
+        if (!response.ok) {
+            throw new Error(resultaat.message ?? 'Afrekenen is mislukt.')
+        }
+
+        bestelling.value = []
+        alert(resultaat.message)
+    } catch (fout) {
+        alert(fout.message)
+    }
+}
 </script>
 
 <template>
@@ -140,7 +176,11 @@ function verwijderBestelling() {
                                 <td>€ {{ formatPrice(totaalbedrag) }}</td>
 
                                 <td class="cash-desk__actions">
-                                    <button type="button">Afrekenen</button>
+                                    <button id="payOrder" type="button"
+                                        :disabled="bestelling.length === 0"
+                                        @click="afrekenen">
+                                        Afrekenen
+                                    </button>
                                     <button type="button" @click="verwijderBestelling">Verwijderen</button>
                                 </td>
                             </tr>
