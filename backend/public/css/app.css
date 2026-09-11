@@ -386,3 +386,79 @@ a {
     height: 450px;
     border: 0;
 }
+
+.table-selection {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table-selection__intro {
+    margin-bottom: 18px;
+    padding: 18px;
+    color: black;
+    background-color: #f6d96f;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.table-selection__intro h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.table-selection__intro p {
+    margin: 0;
+}
+
+.table-selection__options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+.table-selection__options button {
+    height: 66px;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.table-selection__options button:hover {
+    background-color: #f6d96f;
+}
+
+.table-selection__options form {
+    margin: 0;
+}
+
+.table-selection__options button {
+    width: 100%;
+}
+
+.tablet-order-intro {
+    margin-bottom: 18px;
+    padding: 16px;
+    color: black;
+    background-color: #f6d96f;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tablet-order-intro h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.tablet-order-intro p {
+    margin: 0;
+}
+
+#tablet-bestelling-app .cash-desk__menu,
+#tablet-bestelling-app .cash-desk__order,
+#tablet-bestelling-app .cash-desk__total {
+    color: black;
+    background-color: white;
+}

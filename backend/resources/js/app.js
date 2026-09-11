@@ -21,3 +21,21 @@ const verkoopoverzichtElement = document.querySelector(
 if (verkoopoverzichtElement) {
     createApp(VerkoopoverzichtApp).mount(verkoopoverzichtElement)
 }
+
+const tabletBestellingElement = document.querySelector(
+    '#tablet-bestelling-app'
+)
+
+if (tabletBestellingElement) {
+    const gerechtenPerCategorie = JSON.parse(
+        tabletBestellingElement.dataset.gerechten
+    )
+
+    createApp(KassaApp, {
+        gerechtenPerCategorie,
+        modus: 'tablet',
+        tafelnummer: Number(
+            tabletBestellingElement.dataset.tafelnummer
+        ),
+    }).mount(tabletBestellingElement)
+}

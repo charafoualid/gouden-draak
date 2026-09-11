@@ -1,13 +1,20 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-defineProps({
+const props = defineProps({
     gerechtenPerCategorie: {
         type: Object,
         required: true,
     },
+    modus: {
+        type: String,
+        default: 'kassa',
+    },
+    tafelnummer: {
+        type: Number,
+        default: null,
+    },
 })
-
 const bestelling = ref([])
 
 function voegGerechtToe(gerecht) {
@@ -49,7 +56,12 @@ async function afrekenen() {
     }
 
     try {
-        const response = await fetch('/kassa/afrekenen', {
+
+        const endpoint = props.modus === 'tablet'
+        ? '/bestellen/plaatsen'
+        : '/kassa/afrekenen'
+
+        const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -176,10 +188,13 @@ async function afrekenen() {
                                 <td>€ {{ formatPrice(totaalbedrag) }}</td>
 
                                 <td class="cash-desk__actions">
-                                    <button id="payOrder" type="button"
+                                    <button
+                                        id="payOrder"
+                                        type="button"
                                         :disabled="bestelling.length === 0"
-                                        @click="afrekenen">
-                                        Afrekenen
+                                        @click="afrekenen"
+                                    >
+                                        {{ modus === 'tablet' ? 'Bestelling plaatsen' : 'Afrekenen' }}
                                     </button>
                                     <button type="button" @click="verwijderBestelling">Verwijderen</button>
                                 </td>

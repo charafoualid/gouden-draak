@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <title>@yield('title', 'The Golden Dragon')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-
+@vite([
+    'resources/css/kassa.css',
+    'resources/js/app.js',
+])
 <body>
     <header class="site-header">
         <div class="site-brand">
@@ -81,6 +85,10 @@
                         <ul class="main-navigation">
                             <li>
                                 <a href="{{ route('menukaart') }}">Menukaart</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('bestellen') }}">Bestellen</a>
                             </li>
 
                             <li>

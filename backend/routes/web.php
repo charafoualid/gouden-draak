@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kassa\LoginController;
 use App\Http\Controllers\Kassa\KassaController;
+use App\Http\Controllers\BestellingController;
 
 Route::view('/', 'pages.home')
     ->name('home');
@@ -51,3 +52,24 @@ Route::get(
 )
     ->middleware('auth')
     ->name('kassa.verkoopoverzicht.gegevens');
+
+
+Route::view('/bestellen', 'pages.bestellen')
+    ->name('bestellen');
+
+Route::post(
+    '/bestellen/tafel/{tafelnummer}',
+    [BestellingController::class, 'kiesTafel']
+)
+    ->whereNumber('tafelnummer')
+    ->name('bestellen.tafel');
+
+Route::get(
+    '/bestellen/menu',
+    [BestellingController::class, 'toonMenu']
+)->name('bestellen.menu');
+
+Route::post(
+    '/bestellen/plaatsen',
+    [BestellingController::class, 'plaatsBestelling']
+)->name('bestellen.plaatsen');
