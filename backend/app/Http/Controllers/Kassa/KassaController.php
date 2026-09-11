@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Hulpvraag;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Bestelregel;
 
 class KassaController extends Controller
 {
@@ -22,9 +23,21 @@ class KassaController extends Controller
             ->orderBy('menu_toevoeging')
             ->get()
             ->groupBy('soortgerecht');
+        
+        $veelgebruikteOpmerkingen = Bestelregel::query()
+            ->whereNotNull('opmerking')
+            ->where('opmerking', '!=', '')
+            ->select('opmerking')
+            ->selectRaw('COUNT(*) as aantal')
+            ->groupBy('opmerking')
+            ->orderByDesc('aantal')
+            ->limit(10)
+            ->pluck('opmerking');
 
         return view('pages.kassa.dashboard', [
             'gerechtenPerCategorie' => $gerechtenPerCategorie,
+            'veelgebruikteOpmerkingen' => $veelgebruikteOpmerkingen,
+
         ]);
     }
 
@@ -34,6 +47,11 @@ class KassaController extends Controller
             'gerechten' => ['required', 'array', 'min:1'],
             'gerechten.*.id' => ['required', 'integer', 'distinct', 'exists:menu,id'],
             'gerechten.*.aantal' => ['required', 'integer', 'min:1'],
+            'gerechten.*.opmerking' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
         ]);
 
         $bestelling = DB::transaction(function () use ($gegevens) {
@@ -47,7 +65,7 @@ class KassaController extends Controller
                 return [
                     'menu_id' => $gerecht['id'],
                     'aantal' => $gerecht['aantal'],
-                    'opmerking' => null,
+                    'opmerking' => $gerecht['opmerking'] ?? null,
                 ];
             })->all();
 

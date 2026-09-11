@@ -419,3 +419,10 @@ body {
 .help-requests__success {
     color: green;
 }
+
+.cash-desk__comment {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;
+}

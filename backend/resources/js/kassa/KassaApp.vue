@@ -14,6 +14,10 @@ const props = defineProps({
         type: Number,
         default: null,
     },
+    veelgebruikteOpmerkingen: {
+    type: Array,
+    default: () => [],
+    },
 })
 const bestelling = ref([])
 
@@ -30,6 +34,7 @@ function voegGerechtToe(gerecht) {
     bestelling.value.push({
         ...gerecht,
         aantal: 1,
+        opmerking: '',
     })
 }
 
@@ -74,6 +79,7 @@ async function afrekenen() {
                 gerechten: bestelling.value.map(gerecht => ({
                     id: gerecht.id,
                     aantal: gerecht.aantal,
+                    opmerking: gerecht.opmerking || null,
                 })),
             }),
         })
@@ -258,6 +264,17 @@ async function vraagHulp() {
                                     <i v-if="gerecht.beschrijving">
                                         ({{ gerecht.beschrijving }})
                                     </i>
+                                    <input
+                                        v-if="modus === 'kassa'"
+                                        v-model.trim="gerecht.opmerking"
+                                        class="cash-desk__comment"
+                                        type="text"
+                                        maxlength="255"
+                                        placeholder="Opmerking"
+                                        list="veelgebruikte-opmerkingen"
+                                    >
+
+                                    
                                 </td>
 
                                 <td>
@@ -274,6 +291,14 @@ async function vraagHulp() {
                             </tr>
                         </tbody>
                     </table>
+
+                    <datalist id="veelgebruikte-opmerkingen">
+                        <option
+                            v-for="opmerking in veelgebruikteOpmerkingen"
+                            :key="opmerking"
+                            :value="opmerking"
+                        />
+                    </datalist>
                 </div>
 
                 <div class="cash-desk__total">

@@ -9,8 +9,13 @@ if (kassaElement) {
         kassaElement.dataset.gerechten
     )
 
+    const veelgebruikteOpmerkingen = JSON.parse(
+    kassaElement.dataset.opmerkingen
+    )
+
     createApp(KassaApp, {
         gerechtenPerCategorie,
+        veelgebruikteOpmerkingen,
     }).mount(kassaElement)
 }
 
