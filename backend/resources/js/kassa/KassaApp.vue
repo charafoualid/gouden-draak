@@ -133,9 +133,36 @@ const gefilterdeGerechten = computed(() => {
 <template>
     <section class="cash-desk">
         <div class="cash-desk__left">
+            <div class="cash-desk__filters">
+                <label>
+                    Zoeken
+                    <input
+                        v-model="zoekterm"
+                        type="search"
+                        placeholder="Naam of gerechtnummer"
+                    >
+                </label>
+
+                <label>
+                    Categorie
+                    <select v-model="geselecteerdeCategorie">
+                        <option value="">
+                            Alle categorieën
+                        </option>
+
+                        <option
+                            v-for="categorie in categorieen"
+                            :key="categorie"
+                            :value="categorie"
+                        >
+                            {{ categorie }}
+                        </option>
+                    </select>
+                </label>
+            </div>
             <div class="cash-desk__menu">
                 <template
-                    v-for="(gerechten, soortgerecht) in gerechtenPerCategorie"
+                    v-for="(gerechten, soortgerecht) in gefilterdeGerechten"
                     :key="soortgerecht"
                 >
                     <h2 class="cash-desk__heading">
