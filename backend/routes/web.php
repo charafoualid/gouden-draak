@@ -40,3 +40,14 @@ Route::get('/kassa/dashboard', [KassaController::class, 'index'])
 Route::post('/kassa/afrekenen', [KassaController::class, 'afrekenen'])
     ->middleware('auth')
     ->name('kassa.afrekenen');
+
+Route::view('/kassa/verkoopoverzicht', 'pages.kassa.verkoopoverzicht')
+    ->middleware('auth')
+    ->name('kassa.verkoopoverzicht');
+
+Route::get(
+    '/kassa/verkoopoverzicht/gegevens',
+    [KassaController::class, 'verkoopgegevens']
+)
+    ->middleware('auth')
+    ->name('kassa.verkoopoverzicht.gegevens');

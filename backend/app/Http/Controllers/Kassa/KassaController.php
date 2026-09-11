@@ -59,4 +59,68 @@ class KassaController extends Controller
             'bestelling_id' => $bestelling->id,
         ], 201);
     }
+
+    public function verkoopgegevens(Request $request): JsonResponse
+    {
+        $gegevens = $request->validate([
+            'begindatum' => ['required', 'date'],
+            'einddatum' => [
+                'required',
+                'date',
+                'after_or_equal:begindatum',
+            ],
+        ]);
+
+        $verkoopregels = DB::table('bestellingen as bestelling')
+            ->join(
+                'bestelregels as bestelregel',
+                'bestelregel.bestelling_id',
+                '=',
+                'bestelling.id'
+            )
+            ->join(
+                'menu as gerecht',
+                'gerecht.id',
+                '=',
+                'bestelregel.menu_id'
+            )
+            ->whereBetween('bestelling.besteldatum', [
+                $gegevens['begindatum'].' 00:00:00',
+                $gegevens['einddatum'].' 23:59:59',
+            ])
+            ->select([
+                'bestelling.id as bestelling_id',
+                'bestelling.besteldatum',
+                'gerecht.id as menu_id',
+                'gerecht.naam',
+                'gerecht.price as prijs',
+                'bestelregel.aantal',
+                DB::raw(
+                    '(gerecht.price * bestelregel.aantal) as subtotaal'
+                ),
+            ])
+            ->orderBy('bestelling.besteldatum')
+            ->orderBy('bestelling.id')
+            ->get();
+
+        $omzetInclusiefBtw = round(
+            $verkoopregels->sum(
+                fn ($regel) => (float) $regel->subtotaal
+            ),
+            2
+        );
+
+        $omzetExclusiefBtw = round($omzetInclusiefBtw / 1.09, 2);
+        $btw = round($omzetInclusiefBtw - $omzetExclusiefBtw, 2);
+
+        return response()->json([
+            'verkoopregels' => $verkoopregels,
+            'totalen' => [
+                'inclusief_btw' => $omzetInclusiefBtw,
+                'btw' => $btw,
+                'exclusief_btw' => $omzetExclusiefBtw,
+            ],
+        ]);
+    }
+
 }

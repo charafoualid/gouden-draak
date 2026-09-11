@@ -199,3 +199,107 @@ body {
 .cash-desk__order-table input {
     width: 100%;
 }
+
+.sales-overview {
+    padding: 25px 12px 0;
+}
+
+.sales-overview__top {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: 24px;
+    padding-bottom: 13px;
+    border-bottom: 2px solid rgb(0, 102, 255);
+}
+
+.sales-overview__filters,
+.sales-overview__totals,
+.sales-overview__results {
+    border: 1px solid rgb(0, 102, 255);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.sales-overview__filters {
+    min-height: 124px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 1fr 195px;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px 18px;
+    align-items: center;
+}
+
+.sales-overview__filters label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.sales-overview__filters input {
+    width: 140px;
+}
+
+.sales-overview__filters button {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    height: 65px;
+    color: rgb(0, 102, 255);
+    background-color: rgb(231, 241, 248);
+    border: 1px solid rgb(0, 102, 255);
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.sales-overview__totals {
+    min-height: 124px;
+    padding: 28px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 28px;
+}
+
+.sales-overview__results {
+    height: 575px;
+    margin-top: 12px;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.sales-overview__results table {
+    width: 58%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.sales-overview__results th {
+    border-right: 1px solid rgb(0, 102, 255);
+    border-bottom: 2px solid rgb(0, 102, 255);
+}
+
+.sales-overview__results th:last-child {
+    border-right: 0;
+}
+
+.sales-overview__results th:nth-child(1) {
+    width: 12%;
+}
+
+.sales-overview__results th:nth-child(2) {
+    width: 58%;
+}
+
+.sales-overview__results th:nth-child(3),
+.sales-overview__results th:nth-child(4),
+.sales-overview__results th:nth-child(5) {
+    width: 10%;
+}
+
+.sales-overview__results td:nth-child(3),
+.sales-overview__results td:nth-child(4),
+.sales-overview__results td:nth-child(5) {
+    text-align: center;
+}

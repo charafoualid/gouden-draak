@@ -36,9 +36,9 @@
                     Gerechten
                 </a>
 
-                <button class="kassa-menu-button" type="button">
+                <a class="kassa-menu-button" href="{{ route('kassa.verkoopoverzicht') }}">
                     Verkoop Overzicht
-                </button>
+                </a>
 
                 <form
                     class="kassa-logout-form"
