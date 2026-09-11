@@ -90,6 +90,44 @@ async function afrekenen() {
         alert(fout.message)
     }
 }
+
+const zoekterm = ref('')
+const geselecteerdeCategorie = ref('')
+
+const categorieen = computed(() => {
+    return Object.keys(props.gerechtenPerCategorie)
+})
+
+const gefilterdeGerechten = computed(() => {
+    const zoekwaarde = zoekterm.value.trim().toLowerCase()
+
+    return Object.fromEntries(
+        Object.entries(props.gerechtenPerCategorie)
+            .filter(([categorie]) => {
+                return geselecteerdeCategorie.value === ''
+                    || categorie === geselecteerdeCategorie.value
+            })
+            .map(([categorie, gerechten]) => {
+                const resultaten = gerechten.filter(gerecht => {
+                    const nummer =
+                        `${gerecht.menunummer}${gerecht.menu_toevoeging ?? ''}`
+                            .toLowerCase()
+
+                    const naam = gerecht.naam.toLowerCase()
+                    const beschrijving =
+                        (gerecht.beschrijving ?? '').toLowerCase()
+
+                    return nummer.includes(zoekwaarde)
+                        || naam.includes(zoekwaarde)
+                        || beschrijving.includes(zoekwaarde)
+                })
+
+                return [categorie, resultaten]
+            })
+            .filter(([, gerechten]) => gerechten.length > 0)
+    )
+})
+
 </script>
 
 <template>
