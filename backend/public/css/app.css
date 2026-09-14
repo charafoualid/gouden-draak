@@ -462,3 +462,74 @@ a {
     color: black;
     background-color: white;
 }
+
+.menu-list {
+    width: 85%;
+    margin: 70px auto 30px;
+    color: #000;
+}
+
+.menu-list__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background-color: #f6d96f;
+    border: 1px solid #000;
+}
+
+.menu-list__toolbar h2 {
+    margin: 0;
+}
+
+.menu-list__toolbar button {
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu-list__category {
+    margin-top: 20px;
+    padding: 20px 30px;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.menu-list__category h3 {
+    margin: 0 0 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.menu-list__item {
+    display: grid;
+    grid-template-columns: 45px 80px 1fr 100px;
+    align-items: center;
+    min-height: 38px;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-list__item:last-child {
+    border-bottom: 0;
+}
+
+.menu-list__favorite {
+    border: 0;
+    background: transparent;
+    color: #d5a000;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.menu-list__number {
+    font-weight: bold;
+}
+
+.menu-list__name {
+    padding-right: 20px;
+}
+
+.menu-list__price {
+    text-align: right;
+    font-weight: bold;
+}

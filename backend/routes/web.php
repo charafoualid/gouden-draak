@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kassa\LoginController;
 use App\Http\Controllers\Kassa\KassaController;
 use App\Http\Controllers\BestellingController;
+use App\Http\Controllers\MenukaartController;
+
 
 Route::view('/', 'pages.home')
     ->name('home');
@@ -92,3 +94,6 @@ Route::patch(
 )
     ->middleware('auth')
     ->name('kassa.hulpvragen.afmelden');
+
+Route::get('/menukaart', [MenukaartController::class, 'index'])
+    ->name('menukaart');

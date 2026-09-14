@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import KassaApp from './kassa/KassaApp.vue'
 import VerkoopoverzichtApp from './kassa/VerkoopoverzichtApp.vue'
+import MenukaartApp from './menukaart/MenukaartApp.vue'
 
 const kassaElement = document.querySelector('#kassa-app')
 
@@ -43,4 +44,16 @@ if (tabletBestellingElement) {
             tabletBestellingElement.dataset.tafelnummer
         ),
     }).mount(tabletBestellingElement)
+}
+
+const menukaartElement = document.querySelector('#menukaart-app')
+
+if (menukaartElement) {
+    const gerechtenPerCategorie = JSON.parse(
+        menukaartElement.dataset.gerechten
+    )
+
+    createApp(MenukaartApp, {
+        gerechtenPerCategorie,
+    }).mount(menukaartElement)
 }
