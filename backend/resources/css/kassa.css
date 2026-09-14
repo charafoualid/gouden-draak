@@ -426,3 +426,138 @@ body {
     margin-top: 5px;
     box-sizing: border-box;
 }
+
+.dish-management {
+    margin: 25px;
+}
+
+.dish-management__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #06f;
+}
+
+.dish-management__toolbar h1 {
+    margin: 0;
+}
+
+.dish-management details > summary {
+    padding: 10px 16px;
+    background-color: #e2eef7;
+    border: 1px solid #06f;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+}
+
+.dish-management__toolbar details[open] {
+    flex-basis: 100%;
+}
+
+.dish-management__form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    padding: 18px;
+    background-color: #f7f7f7;
+    border: 1px solid #06f;
+}
+
+.dish-management__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.dish-management__form input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.dish-management__form button {
+    align-self: end;
+    padding: 9px 14px;
+    cursor: pointer;
+}
+
+.dish-management__category {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #06f;
+}
+
+.dish-management__category h2 {
+    margin-top: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.dish-management__item {
+    display: grid;
+    grid-template-columns: 75px 1fr 110px 110px 110px;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dish-management__item:last-child {
+    border-bottom: 0;
+}
+
+.dish-management__information i {
+    display: block;
+    margin-top: 3px;
+}
+
+.dish-management__price {
+    text-align: right;
+}
+
+.dish-management__edit[open] {
+    grid-column: 1 / -1;
+}
+
+.dish-management__edit .dish-management__form {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dish-management__delete {
+    padding: 9px 12px;
+    color: #fff;
+    background-color: #c62828;
+    border: 1px solid #8b0000;
+    cursor: pointer;
+}
+
+.dish-management__delete:hover {
+    background-color: #a00000;
+}
+
+.dish-management__success {
+    padding: 12px;
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.dish-management__error {
+    margin-top: 15px;
+    padding: 12px;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.dish-management__error p {
+    margin: 3px 0;
+}

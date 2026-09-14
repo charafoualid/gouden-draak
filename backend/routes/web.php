@@ -6,13 +6,30 @@ use App\Http\Controllers\Kassa\KassaController;
 use App\Http\Controllers\BestellingController;
 use App\Http\Controllers\MenukaartController;
 use App\Http\Controllers\Kassa\DagrapportController;
+use App\Http\Controllers\Kassa\GerechtController;
 
 Route::view('/', 'pages.home')
     ->name('home');
 
-Route::view('/kassa/gerechten', 'pages.kassa.gerechten')
-    ->middleware('auth')
-    ->name('kassa.gerechten');
+Route::get(
+    '/kassa/gerechten',
+    [GerechtController::class, 'index']
+)->name('kassa.gerechten');
+
+Route::post(
+    '/kassa/gerechten',
+    [GerechtController::class, 'store']
+)->name('kassa.gerechten.store');
+
+Route::patch(
+    '/kassa/gerechten/{gerecht}',
+    [GerechtController::class, 'update']
+)->name('kassa.gerechten.update');
+
+Route::delete(
+    '/kassa/gerechten/{gerecht}',
+    [GerechtController::class, 'destroy']
+)->name('kassa.gerechten.destroy');
 
 Route::view('/nieuws', 'pages.news')
     ->name('nieuws');
