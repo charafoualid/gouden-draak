@@ -97,3 +97,6 @@ Route::patch(
 
 Route::get('/menukaart', [MenukaartController::class, 'index'])
     ->name('menukaart');
+
+Route::get('/menukaart/pdf', [MenukaartController::class, 'downloadPdf'])
+    ->name('menukaart.pdf');

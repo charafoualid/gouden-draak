@@ -104,9 +104,12 @@ function formatPrijs(prijs) {
                 </select>
             </label>
 
-            <button type="button">
+            <a
+                href="/menukaart/pdf"
+                class="menu-list__pdf-button"
+            >
                 Menu downloaden als PDF
-            </button>
+            </a>
         </div>
 
         <section

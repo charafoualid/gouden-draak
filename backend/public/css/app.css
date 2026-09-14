@@ -533,3 +533,17 @@ a {
     text-align: right;
     font-weight: bold;
 }
+
+.menu-list__pdf-button {
+    display: inline-block;
+    padding: 10px 16px;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-list__pdf-button:hover {
+    background-color: #eee;
+}
