@@ -12,6 +12,7 @@ class MenukaartController extends Controller
     public function index(): View
     {
         $gerechtenPerCategorie = Gerecht::query()
+            ->where('actief', true)
             ->orderBy('id')
             ->orderBy('menunummer')
             ->orderBy('menu_toevoeging')
@@ -26,6 +27,7 @@ class MenukaartController extends Controller
     public function downloadPdf(): Response
     {
         $gerechtenPerCategorie = Gerecht::query()
+            ->where('actief', true)
             ->orderBy('id')
             ->orderBy('menunummer')
             ->orderBy('menu_toevoeging')

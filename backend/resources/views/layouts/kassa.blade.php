@@ -40,6 +40,10 @@
                     Verkoop Overzicht
                 </a>
 
+                <a class="kassa-menu-button" href="{{ route('kassa.dagrapporten') }}">
+                    Dagrapport
+                </a>
+
                 <a
                     class="kassa-menu-button"
                     href="{{ route('kassa.hulpvragen') }}"

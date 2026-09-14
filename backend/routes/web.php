@@ -5,7 +5,7 @@ use App\Http\Controllers\Kassa\LoginController;
 use App\Http\Controllers\Kassa\KassaController;
 use App\Http\Controllers\BestellingController;
 use App\Http\Controllers\MenukaartController;
-
+use App\Http\Controllers\Kassa\DagrapportController;
 
 Route::view('/', 'pages.home')
     ->name('home');
@@ -100,3 +100,13 @@ Route::get('/menukaart', [MenukaartController::class, 'index'])
 
 Route::get('/menukaart/pdf', [MenukaartController::class, 'downloadPdf'])
     ->name('menukaart.pdf');
+
+Route::get(
+    '/kassa/dagrapporten',
+    [DagrapportController::class, 'index']
+)->name('kassa.dagrapporten');
+
+Route::get(
+    '/kassa/dagrapporten/{bestandsnaam}',
+    [DagrapportController::class, 'download']
+)->name('kassa.dagrapporten.download');

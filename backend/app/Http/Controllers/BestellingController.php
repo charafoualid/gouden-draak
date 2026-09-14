@@ -41,6 +41,7 @@ class BestellingController extends Controller
         }
 
         $gerechtenPerCategorie = Gerecht::query()
+            ->where('actief', true)
             ->orderBy('id')
             ->orderBy('menunummer')
             ->orderBy('menu_toevoeging')

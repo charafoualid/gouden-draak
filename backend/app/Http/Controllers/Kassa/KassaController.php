@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Hulpvraag;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Bestelregel;
+use App\Services\VerkoopoverzichtService;
 
 class KassaController extends Controller
 {
     public function index(): View
     {
         $gerechtenPerCategorie = Gerecht::query()
+            ->where('actief', true)
             ->orderBy('id')
             ->orderBy('menunummer')
             ->orderBy('menu_toevoeging')
@@ -80,8 +82,10 @@ class KassaController extends Controller
         ], 201);
     }
 
-    public function verkoopgegevens(Request $request): JsonResponse
-    {
+    public function verkoopgegevens(
+        Request $request,
+        VerkoopoverzichtService $verkoopoverzicht
+    ): JsonResponse {
         $gegevens = $request->validate([
             'begindatum' => ['required', 'date'],
             'einddatum' => [
@@ -91,56 +95,12 @@ class KassaController extends Controller
             ],
         ]);
 
-        $verkoopregels = DB::table('bestellingen as bestelling')
-            ->join(
-                'bestelregels as bestelregel',
-                'bestelregel.bestelling_id',
-                '=',
-                'bestelling.id'
+        return response()->json(
+            $verkoopoverzicht->maak(
+                $gegevens['begindatum'],
+                $gegevens['einddatum']
             )
-            ->join(
-                'menu as gerecht',
-                'gerecht.id',
-                '=',
-                'bestelregel.menu_id'
-            )
-            ->whereBetween('bestelling.besteldatum', [
-                $gegevens['begindatum'].' 00:00:00',
-                $gegevens['einddatum'].' 23:59:59',
-            ])
-            ->select([
-                'bestelling.id as bestelling_id',
-                'bestelling.besteldatum',
-                'gerecht.id as menu_id',
-                'gerecht.naam',
-                'gerecht.price as prijs',
-                'bestelregel.aantal',
-                DB::raw(
-                    '(gerecht.price * bestelregel.aantal) as subtotaal'
-                ),
-            ])
-            ->orderBy('bestelling.besteldatum')
-            ->orderBy('bestelling.id')
-            ->get();
-
-        $omzetInclusiefBtw = round(
-            $verkoopregels->sum(
-                fn ($regel) => (float) $regel->subtotaal
-            ),
-            2
         );
-
-        $omzetExclusiefBtw = round($omzetInclusiefBtw / 1.09, 2);
-        $btw = round($omzetInclusiefBtw - $omzetExclusiefBtw, 2);
-
-        return response()->json([
-            'verkoopregels' => $verkoopregels,
-            'totalen' => [
-                'inclusief_btw' => $omzetInclusiefBtw,
-                'btw' => $btw,
-                'exclusief_btw' => $omzetExclusiefBtw,
-            ],
-        ]);
     }
 
     public function hulpvragen(): View
