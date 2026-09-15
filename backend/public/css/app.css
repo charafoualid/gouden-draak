@@ -1,0 +1,549 @@
+@font-face {
+    font-family: 'chinese_takeawayregular';
+    src:
+        url('/fonts/chinesetakeaway-webfont.woff2') format('woff2'),
+        url('/fonts/chinesetakeaway-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: darkred;
+}
+
+body {
+    margin: 15px 50px;
+    background-color: darkred;
+}
+
+a {
+    color: yellow;
+    text-decoration: none;
+}
+
+/* Bovenste balk */
+
+.site-header {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    width: 100%;
+    height: 50px;
+    background-color: red;
+}
+
+.site-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: yellow;
+    font-size: 30px;
+    white-space: nowrap;
+}
+
+.site-brand__dragon {
+    display: block;
+    height: 50px;
+}
+
+.site-brand__name {
+    font-family: 'chinese_takeawayregular', serif;
+}
+
+.announcement {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    color: yellow;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.announcement__text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: announcement-scroll 16s linear infinite;
+}
+
+@keyframes announcement-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Decoratieve gele rand */
+
+.decorative-frame {
+    --frame-color: yellow;
+
+    width: 100%;
+    padding: 7px 0;
+    background-color: red;
+}
+
+.decorative-frame__top,
+.decorative-frame__bottom {
+    width: 100%;
+    height: 75px;
+
+    background:
+        /* Lange horizontale lijnen */
+        linear-gradient(var(--frame-color) 0 0)
+            82px 0 / calc(100% - 164px) 4px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            32px 25px / calc(100% - 64px) 4px no-repeat,
+
+        /* Horizontale lijnen links */
+        linear-gradient(var(--frame-color) 0 0)
+            7px 0 / 50px 4px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            7px 50px / 75px 4px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            7px 71px / 50px 4px no-repeat,
+
+        /* Horizontale lijnen rechts */
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 57px) 0 / 50px 4px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 82px) 50px / 75px 4px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 57px) 71px / 50px 4px no-repeat,
+
+        /* Verticale lijnen links */
+        linear-gradient(var(--frame-color) 0 0)
+            7px 0 / 4px 50px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            32px 25px / 4px 50px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            57px 0 / 4px 75px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            78px 0 / 4px 50px no-repeat,
+
+        /* Verticale lijnen rechts */
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 11px) 0 / 4px 50px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 36px) 25px / 4px 50px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 61px) 0 / 4px 75px no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 82px) 0 / 4px 50px no-repeat;
+}
+
+.decorative-frame__bottom {
+    transform: scaleY(-1);
+}
+
+.decorative-frame__body {
+    position: relative;
+    padding: 0 82px;
+
+    background:
+        linear-gradient(var(--frame-color) 0 0)
+            7px 0 / 4px 100% no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            32px 0 / 4px 100% no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 36px) 0 / 4px 100% no-repeat,
+        linear-gradient(var(--frame-color) 0 0)
+            calc(100% - 11px) 0 / 4px 100% no-repeat;
+}
+
+/* Restauranttitel en navigatie */
+
+.restaurant-intro {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    min-height: 200px;
+}
+
+.restaurant-intro__dragon {
+    display: block;
+    height: 200px;
+}
+
+.restaurant-intro__center {
+    padding-top: 16px;
+    text-align: center;
+}
+
+.restaurant-intro__subtitle {
+    margin: 0;
+    color: yellow;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.restaurant-intro__title {
+    margin: 0;
+    color: yellow;
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+.main-navigation {
+    display: flex;
+    width: max-content;
+    margin: 25px auto 0;
+    padding: 0;
+    border: 1px solid white;
+    list-style: none;
+}
+
+.main-navigation li:not(:last-child) {
+    border-right: 1px solid white;
+}
+
+.main-navigation a {
+    display: block;
+    padding: 1px 32px;
+    background-image: url('/images/menu_bg_gradient.png');
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    color: white;
+    font-size: 20px;
+    line-height: 1.25;
+}
+
+/* Wisselende pagina-inhoud */
+
+.page-content {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.contact-shortcut {
+    display: block;
+    margin-top: 16px;
+    color: yellow;
+    text-align: center;
+}
+
+/* Studentenaanbieding */
+
+.student-offer {
+    margin: 0 50px;
+    padding: 32px 20px 20px;
+    border: 1px solid black;
+    background-color: floralwhite;
+    text-align: center;
+}
+
+.student-offer__introduction {
+    margin: 0 0 52px;
+    font-size: 1.17rem;
+    font-weight: bold;
+}
+
+.student-offer__introduction span {
+    display: block;
+}
+
+.student-offer__title {
+    margin: 0 0 28px;
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+
+.student-offer__meal {
+    margin: 0 0 28px;
+    font-size: 2rem;
+}
+
+.student-offer__instruction {
+    margin: 0;
+    font-size: 1.17rem;
+    font-weight: bold;
+}
+
+.student-offer__dishes {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    column-gap: 20%;
+    width: 60%;
+    margin: 28px auto 0;
+    font-size: 1.17rem;
+    font-weight: bold;
+}
+
+.student-offer__dish-column {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.student-offer__dish-column--left {
+    text-align: right;
+}
+
+.student-offer__dish-column:not(.student-offer__dish-column--left) {
+    text-align: left;
+}
+
+.student-offer__dish-column li {
+    margin-bottom: 3px;
+}
+
+.student-offer__rice {
+    margin: 28px 0;
+    font-size: 1.17rem;
+    font-weight: bold;
+}
+
+.student-offer__price {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Menukaart */
+
+.menu-pages {
+    margin-left: 50px;
+    overflow: hidden;
+    border: 1px solid black;
+    background-color: floralwhite;
+}
+
+.menu-pages__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Nieuws */
+
+.information-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    margin: 0 50px;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: floralwhite;
+    text-align: center;
+}
+
+.information-card__text {
+    margin: 0;
+    font-size: 1.17rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.information-card__text span {
+    display: block;
+}
+
+/* Contact */
+
+.contact-information {
+    min-height: 145px;
+    margin: 0 50px;
+    padding: 32px 20px;
+    border: 1px solid black;
+    background-color: floralwhite;
+    text-align: center;
+}
+
+.contact-information__description {
+    margin: 0 0 28px;
+    font-size: 1.17rem;
+    font-weight: bold;
+}
+
+.contact-information__address {
+    font-size: 1.17rem;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.contact-information__address span {
+    display: block;
+}
+
+.contact-map {
+    margin: 2px 50px 0;
+}
+
+.contact-map iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+.table-selection {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table-selection__intro {
+    margin-bottom: 18px;
+    padding: 18px;
+    color: black;
+    background-color: #f6d96f;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.table-selection__intro h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.table-selection__intro p {
+    margin: 0;
+}
+
+.table-selection__options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+.table-selection__options button {
+    height: 66px;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.table-selection__options button:hover {
+    background-color: #f6d96f;
+}
+
+.table-selection__options form {
+    margin: 0;
+}
+
+.table-selection__options button {
+    width: 100%;
+}
+
+.tablet-order-intro {
+    margin-bottom: 18px;
+    padding: 16px;
+    color: black;
+    background-color: #f6d96f;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tablet-order-intro h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.tablet-order-intro p {
+    margin: 0;
+}
+
+#tablet-bestelling-app .cash-desk__menu,
+#tablet-bestelling-app .cash-desk__order,
+#tablet-bestelling-app .cash-desk__total {
+    color: black;
+    background-color: white;
+}
+
+.menu-list {
+    width: 85%;
+    margin: 70px auto 30px;
+    color: #000;
+}
+
+.menu-list__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background-color: #f6d96f;
+    border: 1px solid #000;
+}
+
+.menu-list__toolbar h2 {
+    margin: 0;
+}
+
+.menu-list__toolbar button {
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu-list__category {
+    margin-top: 20px;
+    padding: 20px 30px;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.menu-list__category h3 {
+    margin: 0 0 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.menu-list__item {
+    display: grid;
+    grid-template-columns: 45px 80px 1fr 100px;
+    align-items: center;
+    min-height: 38px;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-list__item:last-child {
+    border-bottom: 0;
+}
+
+.menu-list__favorite {
+    border: 0;
+    background: transparent;
+    color: #d5a000;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.menu-list__number {
+    font-weight: bold;
+}
+
+.menu-list__name {
+    padding-right: 20px;
+}
+
+.menu-list__price {
+    text-align: right;
+    font-weight: bold;
+}
+
+.menu-list__pdf-button {
+    display: inline-block;
+    padding: 10px 16px;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-list__pdf-button:hover {
+    background-color: #eee;
+}
